@@ -1,0 +1,59 @@
+@media only screen
+and (min-width: 1097px)
+and (max-width: 3840px) {
+    .button {
+        font-size: 100%;
+        margin-top: 5px;
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        padding: .5px 5px;
+        outline: none;
+        border-width: 2px 0;
+        border-style: solid none;
+        border-color: #FDBE33 #000 #D77206;
+        border-radius: 6px;
+        background: linear-gradient(#F3AE0F, #E38916) #E38916;
+        transition: 0.2s;
+    }
+}
+
+@media only screen
+and (min-width: 895px)
+and (max-width: 1096px) {
+    .button {
+        font-size: 100%;
+        margin-top: 5px;
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        padding: .3px 3px;
+        outline: none;
+        border-width: 2px 0;
+        border-style: solid none;
+        border-color: #FDBE33 #000 #D77206;
+        border-radius: 6px;
+        background: linear-gradient(#F3AE0F, #E38916) #E38916;
+        transition: 0.2s;
+    }
+}
+
+@media only screen
+and (min-width: 0px)
+and (max-width: 894px) {
+    .button {
+        font-size: 100%;
+        margin-top: 3px;
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        padding: .3px 3px;
+        outline: none;
+        border-width: 2px 0;
+        border-style: solid none;
+        border-color: #FDBE33 #000 #D77206;
+        border-radius: 6px;
+        background: linear-gradient(#F3AE0F, #E38916) #E38916;
+        transition: 0.2s;
+    }
+}

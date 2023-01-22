@@ -1,0 +1,20 @@
+@media only screen
+and (min-width: 895px)
+and (max-width: 3840px) {
+    .graph {
+        margin-left: 10%;
+        margin-top: 3%;
+        text-align: left;
+        float: left;
+    }
+}
+
+@media only screen
+and (min-width: 0px)
+and (max-width: 894px) {
+    .graph {
+        grid-area: graph;
+        margin: auto;
+        text-align: center;
+    }
+}

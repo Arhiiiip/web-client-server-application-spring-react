@@ -1,0 +1,60 @@
+
+@media only screen
+and (min-width: 895px)
+and (max-width: 3840px) {
+    .mean {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        gap: 0px 0px;
+        grid-template-areas:
+    "graph inputBord";
+        margin-top: 5%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-bottom: 15%;
+        width: 50%;
+        color: red;
+        background-color: rgba(255, 128, 0, 0.47);
+        background-size: 100%;
+    }
+
+}
+
+@media only screen
+and (min-width: 0px)
+and (max-width: 895px) {
+    .mean {
+        margin-top: 5%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-bottom: 5%;
+        width: 50%;
+        background-color: rgba(255, 128, 0, 0.47);
+    }
+
+}
+
+.error{
+    color: red;
+    font-size: 2em;
+}
+
+.appShootD{
+    margin: -8px;
+    min-height: 100vh;
+    background-size: 100%;
+    background-color: rgba(255, 128, 0, 0.47);
+}
+.appReg{
+    margin: -8px;
+    min-height: 100vh;
+    background-size: 100%;
+    background-color: rgba(255, 128, 0, 0.47);
+}
+
+.appAdm{
+    margin: -8px;
+    min-height: 100vh;
+    background-size: 100%;
+    background-color: rgba(255, 128, 0, 0.47);
+}

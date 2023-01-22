@@ -1,0 +1,28 @@
+@media only screen
+and (min-width: 895px)
+and (max-width: 3840px) {
+    .table {
+        grid-area: tableData;
+        margin-top: 15px;
+        margin-left: 3%;
+        margin-right: 3%;
+        background-image: radial-gradient(#fd9090, #855085);
+        width: 94%;
+        height: 50%;
+        font-size: 150%;
+    }
+}
+
+@media only screen
+and (min-width: 0px)
+and (max-width: 894px) {
+    .table{
+        margin-top: 15px;
+        margin-left: 3%;
+        margin-right: 3%;
+        background-image: radial-gradient(#fd9090, #855085);
+        width: 94%;
+        height: 50%;
+        font-size: 80%;
+    }
+}

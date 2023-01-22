@@ -1,0 +1,15 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    letter-spacing: 1px;
+    padding: 0.25em 1.5%;
+    background: #3e5062;
+    color: #ffffff;
+}
+
+.git{
+    text-decoration: none;
+    color: #ffffff;
+}

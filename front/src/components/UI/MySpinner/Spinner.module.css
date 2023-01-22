@@ -1,0 +1,28 @@
+.spinner {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 50px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    gap: 1px 1px;
+    grid-template-areas:". . . . .";
+    text-align: center;
+}
+
+.number {
+    margin: auto;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.border{
+    outline: 2px solid #000;
+    border: 3px solid #fff;
+    border-radius: 10px;
+}
+
+.error{
+    color: red;
+}

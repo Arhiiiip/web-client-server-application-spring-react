@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "axios": "^1.2.2",
+    "bootstrap": "^5.3.0-alpha1",
+    "react-bootstrap": "^2.7.0",
+    "react-bootstrap-table-next": "^4.0.3",
+    "react-native-input-spinner": "^1.7.12",
+    "react-table": "^7.8.0"
+  }
+}

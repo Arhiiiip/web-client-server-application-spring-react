@@ -1,0 +1,36 @@
+@media only screen
+and (min-width: 1097px)
+and (max-width: 3840px) {
+    .table{
+        background-image: radial-gradient(#fd9090, #855085);
+        text-align: center;
+        font-size: 150%;
+        margin-top: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media only screen
+and (min-width: 895px)
+and (max-width: 1096px) {
+    .table{
+        background-image: radial-gradient(#fd9090, #855085);
+        text-align: center;
+        font-size: 120%;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media only screen
+and (min-width: 0px)
+and (max-width: 894px) {
+    .table{
+        background-image: radial-gradient(#fd9090, #855085);
+        text-align: center;
+        font-size: 80%;
+        margin-top: 7px;
+    }
+}
