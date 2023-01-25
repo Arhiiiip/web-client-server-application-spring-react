@@ -52,7 +52,6 @@ const TableData = (props) => {
 
 
     function reloadData() {
-        document.getElementById('midError').innerHTML = ""
         axios.get("/hit/get_all", {
                 headers: {
                     'Authorization': 'Bearer_'.concat(localStorage.getItem('token'))
@@ -67,14 +66,13 @@ const TableData = (props) => {
                     r: res.data.data[num].coordinates.rvalue.toFixed(1),
                     time: res.data.data[num].currentTime,
                     duration: res.data.data[num].executionTime,
-                    result: res.data.data[num].hitResult ? "Попадание":"Промах"
+                    result: res.data.data[num].hitResult ? "Hit":"Miss"
                 }
                 masData.unshift(newDot);
             }
             setData(masData)
         }).catch(error => {
             console.log(error)
-            document.getElementById('midError').innerHTML = "There are problems on the server or your token has expired, try to re-login"
         })
     }
 

@@ -28,7 +28,7 @@ const Spinner = (props) => {
     }
 
     const increment01 = () => {
-        if (validator(props.val + 0.1)) {
+        if (validator(props.val + 0.1)){
             clearError();
             props.setter(props.val + 0.1);
         } else {

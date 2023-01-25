@@ -26,7 +26,6 @@ const TableUsers = (props) => {
     }]
 
     useEffect(() => {
-        reloadData()
         axios.get("/api/auth/check", {
             headers: {
                 'Authorization': 'Bearer_'.concat(localStorage.getItem('token'))
@@ -35,114 +34,137 @@ const TableUsers = (props) => {
             localStorage.setItem("username", res.data.username)
             localStorage.setItem("role", res.data.role)
         })
+    }, [data])
+
+    useEffect(() => {
+        reloadData()
     }, [])
 
+    function gvAdm(res, num) {
+        axios.post("api/adm/give_adm", {
+            username: res.data.users[num].username
+        }, {
+            headers: {
+                'Authorization': 'Bearer_'.concat(localStorage.getItem('token'))
+            }
+        }).then(res => {
+            reloadData()
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    function gvUser(res, num) {
+        axios.post("api/adm/give_user", {
+            username: res.data.users[num].username
+        }, {
+            headers: {
+                'Authorization': 'Bearer_'.concat(localStorage.getItem('token'))
+            }
+        }).then(res => {
+            reloadData()
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    function delUser(res, num) {
+        let username = res.data.users[num].username
+        axios.post("/api/adm/delete_user", {
+                username: username
+            }, {
+                headers: {
+                    'Authorization': 'Bearer_'.concat(localStorage.getItem('token'))
+                }
+            }
+        ).then(res => {
+                reloadData()
+            }
+        ).catch(error => {
+            console.log(error)
+        })
+    }
+
+    function createElements(res) {
+        let masData = [];
+        console.log(res.data.users)
+        for (let num in res.data.users) {
+            const {name: nameR, method: methodR} = getButtonRole(res, num);
+            const {name: nameD, method: methodD} = getButtonDelete(res, num);
+            let newUser = {
+                id: res.data.users[num].id,
+                username: res.data.users[num].username,
+                role: res.data.users[num].role,
+                buttonR: nameR && methodR ? <MyButton name={nameR} method={methodR}/> : <div/>,
+                buttonD: nameD && methodD ? <MyButton name={nameD} method={methodD}/> : <div/>
+            }
+            masData.unshift(newUser);
+        }
+        setData(masData)
+    }
+
+    function getButtonRole(res, num) {
+        switch (localStorage.getItem("role")) {
+            case "ADMIN":
+                if (res.data.users[num].role === "USER") {
+                    return {
+                        name: 'Give Admin',
+                        method: (() => gvAdm(res, num))
+                    }
+                } else {
+                    return {};
+                }
+            case "OWNER":
+                if (res.data.users[num].role === "USER") {
+                    return {
+                        name: 'Give Admin',
+                        method: (() => gvAdm(res, num))
+                    }
+                } else if (res.data.users[num].role === "ADMIN") {
+                    return {
+                        name: 'Take Admin',
+                        method: (() => gvUser(res, num))
+                    }
+                } else {
+                    return {};
+                }
+            default:
+                return {};
+        }
+    }
+
+
+    function getButtonDelete(res, num) {
+        const bDel = {
+            name: 'Delete',
+            method: (() => delUser(res, num))
+        }
+        switch (localStorage.getItem("role")) {
+            case "ADMIN":
+                if (res.data.users[num].role === "USER" && localStorage.getItem("username") !== res.data.users[num]) {
+                    return bDel;
+                } else {
+                    return;
+                }
+            case "OWNER":
+                if (localStorage.getItem("username") !== res.data.users[num]) {
+                    return bDel;
+                } else {
+                    return;
+                }
+            default:
+                return;
+        }
+    }
+
+
     function reloadData() {
-        document.getElementById('midError').innerHTML = ""
         axios.get("/api/adm/get_all_users", {
             headers: {
                 'Authorization': 'Bearer_'.concat(localStorage.getItem('token'))
             }
         }).then(res => {
-            let masData = [];
-            console.log(res.data.users)
-            for (let num in res.data.users) {
-                let newUser = {
-                    id: res.data.users[num].id,
-                    username: res.data.users[num].username,
-                    role: res.data.users[num].role,
-                    buttonR:
-                        localStorage.getItem("role") === "ADMIN" ?
-                            res.data.users[num].role === "USER" ? <MyButton name={'Give admin'} method={() => {
-                                axios.post("api/adm/give_adm", {
-                                    username: res.data.users[num].username
-                                }, {
-                                    headers: {
-                                        'Authorization': 'Bearer_'.concat(localStorage.getItem('token'))
-                                    }
-                                }).then(res => {
-                                    reloadData()
-                                }).catch(error => {
-                                    console.log(error)
-                                })
-                            }
-                            }/> : <div/> :
-                            localStorage.getItem('role') === "OWNER" ?
-                                res.data.users[num].role === "USER" ? <MyButton name={'Give admin'} method={() => {
-                                        axios.post("api/adm/give_adm", {
-                                            username: res.data.users[num].username
-                                        }, {
-                                            headers: {
-                                                'Authorization': 'Bearer_'.concat(localStorage.getItem('token'))
-                                            }
-                                        }).then(res => {
-                                            reloadData()
-                                        }).catch(error => {
-                                            console.log(error)
-                                        })
-                                    }
-                                    }/> :
-                                    res.data.users[num].role === "ADMIN" ? <MyButton name={'Take admin'} method={() => {
-                                        axios.post("api/adm/give_user", {
-                                            username: res.data.users[num].username
-                                        }, {
-                                            headers: {
-                                                'Authorization': 'Bearer_'.concat(localStorage.getItem('token'))
-                                            }
-                                        }).then(res => {
-                                            reloadData()
-                                        }).catch(error => {
-                                            console.log(error)
-                                        })
-                                    }
-                                    }/> : <div/> :
-                                <div/>,
-                    buttonD:
-                        res.data.users[num].role !== "OWNER" ?
-                            localStorage.getItem("role") === "OWNER" ?
-                                localStorage.getItem("username") !== res.data.users[num] ?
-                                    <MyButton name={"delete"} method={() => {
-                                        let username = res.data.users[num].username
-                                        axios.post("/api/adm/delete_user", {
-                                                username: username
-                                            }, {
-                                                headers: {
-                                                    'Authorization': 'Bearer_'.concat(localStorage.getItem('token'))
-                                                }
-                                            }
-                                        ).then(res => {
-                                                reloadData()
-                                            }
-                                        ).catch(error => {
-                                            console.log(error)
-                                        })
-                                    }
-                                    }/> : <div/> : localStorage.getItem("role") === "ADMIN" ?
-                                    res.data.users[num].role === "USER" && localStorage.getItem("username") !== res.data.users[num] ?
-                                        <MyButton name={"delete2"} method={() => {
-                                            let username = res.data.users[num].username
-                                            console.log(username)
-                                            axios.post("/api/adm/delete_user", {
-                                                    username: username
-                                                }, {
-                                                    headers: {
-                                                        'Authorization': 'Bearer_'.concat(localStorage.getItem('token'))
-                                                    }
-                                                }
-                                            ).then(res => {
-                                                    reloadData()
-                                                }
-                                            ).catch(error => {
-                                                console.log(error)
-                                            })
-                                        }
-                                        }/> : <div/> : <div/> : <div/>
-                }
-                console.log(localStorage.getItem("username"))
-                masData.unshift(newUser);
-            }
-            console.log("masData")
-            setData(masData)
+            createElements(res)
         }).catch(error => {
             console.log(error)
         })

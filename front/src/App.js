@@ -16,7 +16,6 @@ function App() {
     const [map, setMap] = useState("log");
     const [isAdmin, setIsAdmin] = useState(false);
     const [resUpload, setResUpload] = useState(false);
-    const [username, setUsername] = useState("");
     const [newUpload, setNewUpload] = useState(() => {
         return {
             x: "",
@@ -36,28 +35,19 @@ function App() {
             }
         }).then(res => {
             setMap('mid')
-            setUsername(res.data.username)
-            if(res.data.role === "ADMIN" || res.data.role === "OWNER"){
+            if (res.data.role === "ADMIN" || res.data.role === "OWNER") {
                 setIsAdmin(true);
             }
         }).catch(() => {
             setMap('log')
-        })}, [])
+        })
+    }, [])
 
-    // useEffect(() => {
-    //     axios.post("/api/auth/register", {
-    //         let jwtdf = localStorage.getItem();
-    //     }).then(res => {
-    //
-    //     }).catch(() => {
-    //         alert("An error occurred on the server")
-    //     })
-    // },[])
 
     // eslint-disable-next-line default-case
-    switch (map){
+    switch (map) {
         case "log":
-            return(
+            return (
                 <div className={styles.appReg}>
                     <MyHeader isLog={map} setLog={setMap}/>
                     <div id={'midError'} className={styles.error}/>
@@ -67,40 +57,22 @@ function App() {
         case "mid":
             return (
                 <div className={styles.appShootD}>
-                    <MyHeader isLog={map} isAdmin={isAdmin}  setLog={setMap}/>
+                    <MyHeader isLog={map} isAdmin={isAdmin} setLog={setMap}/>
                     <div id={'midError'} className={styles.error}></div>
                     <Graph setUpload={setNewUpload} resUpload={resUpload} valR={valR}/>
-                    <InputBord setUpload={setNewUpload} resUpload={resUpload} setResUpload={setResUpload} valR={valR} mValR={setValR}/>
+                    <InputBord setUpload={setNewUpload} resUpload={resUpload} setResUpload={setResUpload} valR={valR}
+                               mValR={setValR}/>
                     <TableData newUpload={newUpload} resUpload={resUpload}/>
                 </div>
             )
         case "god":
-            return(
+            return (
                 <div className={styles.appAdm}>
                     <MyHeader isAdmin={isAdmin} setLog={setMap}/>
                     <AdminPanel/>
                 </div>
             )
     }
-    // if(map === "mid") {
-    //     return (
-    //         <div className={styles.appShootD}>
-    //             <MyHeader isLog={map} isAdmin={isAdmin}  setLog={setMap}/>
-    //             <div id={'midError'} className={styles.error}></div>
-    //             <Graph setUpload={setNewUpload} resUpload={resUpload} valR={valR}/>
-    //             <InputBord setUpload={setNewUpload} resUpload={resUpload} setResUpload={setResUpload} valR={valR} mValR={setValR}/>
-    //             <TableData newUpload={newUpload} resUpload={resUpload} />
-    //         </div>
-    //     )
-    // } else if (map === "log"){
-    //     return(
-    //         <div className={styles.appReg}>
-    //             <MyHeader isLog={map} setLog={setMap}/>
-    //             <div id={'midError'} className={styles.error}/>
-    //             <AuthBord setAdmin={setIsAdmin} setLog={setMap}/>
-    //         </div>
-    //     )
-    // }
 }
 
 export default App;

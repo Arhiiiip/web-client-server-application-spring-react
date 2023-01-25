@@ -61,7 +61,7 @@ const TableDotsUsers = (props) => {
                     r: res.data.data[num].coordinates.rvalue.toFixed(1),
                     time: res.data.data[num].currentTime,
                     duration: res.data.data[num].executionTime,
-                    result: res.data.data[num].hitResult ? "Попадание":"Промах",
+                    result: res.data.data[num].hitResult ? "Hit":"Miss",
                     username: res.data.data[num].user,
                     userid: res.data.data[num].idUser,
                     button: <MyButton name={"delete"} method={() => {

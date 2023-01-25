@@ -6,7 +6,7 @@ import styles from "./Logout.module.css";
 const Logout = (props) => {
     return (
         <div className={styles.logout}>
-            <MyButton name={'Input or Logout'} method={props.method}/>
+            <MyButton name={'Logout'} method={props.method}/>
         </div>
     );
 };
